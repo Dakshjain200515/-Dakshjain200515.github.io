@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST CALCULATOR</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <style>
+        .left {
+            border: 1px solid #ffffea;
+            border-radius: 60px;
+            margin-left: 10px;
+        }
+
+        input {
+            margin-bottom: 2rem;
+        }
+
+        body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: black;
+    position: relative;
+    font-weight: bolder;
+}
+  
+  .right-align {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px; /* Adjust as needed */
+}
+
+.created-by {
+    font-size: 1rem; /* Adjust as needed */
+    text-shadow: 1px 1px 2px black, 0 0 10px whitesmoke, 0 0 5px #008080;
+
+}
+
+.name {
+    font-size: 2rem; /* Adjust as needed */
+    font-weight: bold; /* Optionally make the name bold */
+    margin-left: -15px;
+    text-shadow: 1px 1px 2px black, 0 0 15px whitesmoke, 0 0 5px #008080;
+
+}
+
+#split1 {
+      height: 85%;
+      width: 30%;
+      position: fixed;
+      z-index: 1;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      padding-top: 20px;
+    }
+  
+#split2 {
+      height: 85%;
+      width: 68%;
+      position: fixed;
+      z-index: 1;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      padding-top: 20px;
+      transition: 0.5s;
+      margin-right: 1rem;
+    }
+    
+  .left {
+      left: 0;
+      background-color: black;
+    }
+    
+  .right {
+      right: 0;
+      background-color:#000000;
+    }
+
+      
+  .button {
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #1abc9c;
+      color: #000000;
+      padding: 10px 15px;
+      border: none;
+      margin: 20px;
+      margin-top: 5px;
+      margin-left: 30px;
+      border: 3px solid black;
+      border-radius: 4px;
+      width: 85%;
+  }
+
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    background-color: black;
+
+  }
+    
+  h1 {
+      font-size: 5rem;
+      margin-top: -60px;
+      text-align: center;
+      color: #1abc9c;
+      font-weight: bolder;
+      text-shadow: 1px 1px 2px black, 0 0 25px whitesmoke, 0 0 5px #008080;
+    }
+
+  .client_details{
+      color: #333333;
+      transition: margin-left 0.5s;
+  }
+    
+  .label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 2rem;
+      width: 200px;
+      color: #1abc9c;
+  }
+  
+  input {
+      font-size: 20px;
+      font-weight: bold;
+      border: 3px solid #333333;
+      border-radius: 10px;
+      padding: 8px;
+      margin-left: 2rem;
+      margin-top: 0px;
+      color:#333333;
+      width: 80%;
+      background-color: whitesmoke;
+  }
+
+  .number {
+    text-align: right;
+  }
+
+  input::placeholder {
+  text-align: left;
+}
+  
+table {
+      border-collapse: collapse;
+      width: 98%;
+      font-size: 18px;
+      margin: 1rem;
+      margin-top: 0px;
+    }
+      
+  .table {
+    overflow-x: auto; 
+  }
+
+  thead {
+    position: sticky; 
+    top: 0; 
+    background-color: white;
+  }
+
+  tbody {
+    overflow-y: auto;
+  }
+    
+    table td {
+      border: 1px solid black;
+      padding: 8px;
+      font-weight: bold;
+    }
+
+    table th {
+      border: 1px solid black;
+      padding: 8px;
+      font-weight: bolder;
+    }
+    
+    table tr:nth-child(even){
+      background-color: whitesmoke;
+    }
+
+    table tr:nth-child(odd){
+      background-color: whitesmoke;
+    }
+  
+    table tr:hover {
+      background-color: #adb5bd;
+    }
+    
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #1abc9c;
+      color: black;
+      font-weight: bolder;
+    }
+
+    table thead tr th{
+      text-align: center;
+    }
+
+.bill td{
+    background-color: #ffcad4;
+  }
+
+.ledger tr:hover{
+    background-color: #adb5bd;
+    color: black;
+  }
+
+/* Define the animation */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to the .name class */
+.name {
+  animation: blink 1s infinite;
+}
+
+
+    </style>
+
+
+<div id="main">
+
+    <div class="right-align">
+        <h1 id="created_by">
+            <span class="created-by">Developed by</span>
+            <span class="name">DAKSH</span>
+        </h1>
+    </div>
+
+    <h1 id="h1" style="margin-top: -1rem;">GST Calculator</h1>
+
+    <div id="split1" class="client_details left">
+        <form id="invoiceForm">
+
+            <div style="margin-top: 2rem;">
+                <label for="partyName" class="label">Party Name:</label>
+                <input type="text" id="partyName" pattern="[A-Za-z]+" placeholder="Enter Name" required>
+            </div>
+
+            <div>
+                <label for="bill_purity" class="label">Purity</label><br>
+                <input id="bill_purity" name="bill_purity" list="purity" type="number" class="number"
+                       placeholder="Enter Purity">
+                <datalist id="purity">
+                    <option value="995"></option>
+                    <option value="999"></option>
+                </datalist>
+            </div>
+
+            <div>
+                <label for="weight" class="label">Weight:</label>
+                <input type="number" id="weight" min="0" class="number" placeholder="Enter Weight" required>
+            </div>
+
+            <div>
+                <label for="rate" class="label">Rate:</label>
+                <input type="number" id="rate" min="0" class="number" placeholder="Enter Rate" required>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="button" class="button" onclick="addEntry()">Add Entry</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="split2" class="right">
+
+        <h2>Entries</h2>
+        <table id="entryTable" border="1" style="margin-top: -4rem;">
+            <thead>
+            <tr>
+                <th>Party Name</th>
+                <th>Purity</th>
+                <th>Weight</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>GST</th>
+                <th>TDS</th>
+                <th>Final Amount</th>
+            </tr>
+            </thead>
+            <tbody id="entryBody">
+            <!-- Entries will be dynamically added here -->
+            </tbody>
+            <tfoot id="totalRow">
+            <tr style="background-color: yellow; font-size: 1.5rem;">
+                <td colspan="2">Total Weight:</td>
+                <td id="totalWeight" class="number">0</td>
+
+                <td colspan="2" style="background-color: white;"></td>
+                <td colspan="2">Total Final Amount:</td>
+                <td id="totalFinalAmount" class="number">0.00</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        // Function to calculate values
+        function calculate(weight, rate) {
+            var amount = (weight * rate / 10).toFixed(2);
+            var gst = (amount * 0.03).toFixed(2);
+            var tds = (amount * 0.001).toFixed(2);
+            var finalAmount = (parseFloat(amount) + parseFloat(gst) - parseFloat(tds)).toFixed(2);
+            return [amount, gst, tds, finalAmount];
+        }
+
+        // Function to add entry to the table
+        function addEntry() {
+            var partyName = document.getElementById('partyName').value;
+            var weight = parseFloat(document.getElementById('weight').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+            var purity = parseFloat(document.getElementById('bill_purity').value); // Add this line to get the purity value
+            var [amount, gst, tds, finalAmount] = calculate(weight, rate);
+
+            var tableBody = document.getElementById('entryBody');
+            var newRow = tableBody.insertRow();
+            newRow.innerHTML = `<td>${partyName}</td>
+                                <td class="number">${purity}</td> <!-- Display the purity in the table -->
+                                <td class="number">${weight}</td>
+                                <td class="number">${rate}</td>
+                                <td class="number">${amount}</td>
+                                <td class="number">${gst}</td>
+                                <td class="number">${tds}</td>
+                                <td class="number">${finalAmount}</td>`;
+
+            // Reset input fields
+            document.getElementById('partyName').value = '';
+            document.getElementById('weight').value = '';
+            document.getElementById('rate').value = '';
+            document.getElementById('bill_purity').value = '';
+
+            updateTotal();
+        }
+
+        // Function to update total weight and final amount
+        function updateTotal() {
+            var totalWeight = 0;
+            var totalFinalAmount = 0;
+
+            var rows = document.querySelectorAll('#entryBody tr');
+            rows.forEach(function (row) {
+                totalWeight += parseFloat(row.cells[2].textContent);
+                totalFinalAmount += parseFloat(row.cells[7].textContent);
+            });
+
+            // Update total weight and final amount in the footer
+            document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+            document.getElementById('totalFinalAmount').textContent = totalFinalAmount.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
