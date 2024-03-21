@@ -242,12 +242,13 @@ table {
 
         <form id="invoiceForm">
 
-          <div style="display: flex;">
-
             <div>
                 <label for="partyName" class="label">Party Name:</label><br>
                 <input type="text" id="partyName" pattern="[A-Za-z]+" required>
             </div>
+
+          <div style="display: flex;">
+
 
             <div>
                 <label for="bill_purity" class="label">Purity</label><br>
@@ -294,11 +295,11 @@ table {
             </tbody>
             <tfoot id="totalRow">
             <tr style="background-color: yellow; font-size: 1rem;">
-                <td colspan="2">Total Weight:</td>
+                <td colspan="2">Total:</td>
                 <td id="totalWeight" class="number">0</td>
 
                 <td colspan="2" style="background-color: white;"></td>
-                <td colspan="2">Total Final Amount:</td>
+                <td colspan="2">Total Amount:</td>
                 <td id="totalFinalAmount" class="number">0.00</td>
             </tr>
             </tfoot>
