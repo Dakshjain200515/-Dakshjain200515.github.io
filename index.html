@@ -341,8 +341,8 @@ function addEntry() {
 
             var rows = document.querySelectorAll('#entryBody tr');
             rows.forEach(function (row) {
-                totalWeight += parseFloat(row.cells[2].textContent);
-                totalFinalAmount += parseFloat(row.cells[7].textContent);
+                totalWeight += parseFloat(row.cells[1].textContent);
+                totalFinalAmount += parseFloat(row.cells[6].textContent);
             });
 
             // Update total weight and final amount in the footer
