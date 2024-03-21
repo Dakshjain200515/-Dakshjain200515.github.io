@@ -317,12 +317,12 @@ table {
         }
 
         // Function to add entry to the table
-        function addEntry() {
-            var partyName = document.getElementById('partyName').value;
-            var weight = parseFloat(document.getElementById('weight').value);
-            var rate = parseFloat(document.getElementById('rate').value);
-            var purity = parseFloat(document.getElementById('bill_purity').value); // Add this line to get the purity value
-            var [amount, gst, tds, finalAmount] = calculate(weight, rate);
+function addEntry() {
+    var partyName = document.getElementById('partyName').value;
+    var weight = parseInt(document.getElementById('weight').value);
+    var rate = parseInt(document.getElementById('rate').value);
+    var purity = parseInt(document.getElementById('bill_purity').value); // Add this line to get the purity value
+    var [amount, gst, tds, finalAmount] = calculate(weight, rate);
 
             var tableBody = document.getElementById('entryBody');
             var newRow = tableBody.insertRow();
