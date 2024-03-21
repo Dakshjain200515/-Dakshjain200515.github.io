@@ -307,14 +307,14 @@ table {
     </div>
 
     <script>
-        // Function to calculate values
-        function calculate(weight, rate) {
-            var amount = (weight * rate / 10).toFixed(2);
-            var gst = (amount * 0.03).toFixed(2);
-            var tds = (amount * 0.001).toFixed(2);
-            var finalAmount = (parseFloat(amount) + parseFloat(gst) - parseFloat(tds)).toFixed(2);
-            return [amount, gst, tds, finalAmount];
-        }
+function calculate(weight, rate) {
+    var amount = Math.round(weight * rate / 10);
+    var gst = Math.round(amount * 0.03);
+    var tds = Math.round(amount * 0.001);
+    var finalAmount = amount + gst - tds;
+    return [amount, gst, tds, finalAmount];
+}
+
 
         // Function to add entry to the table
 function addEntry() {
