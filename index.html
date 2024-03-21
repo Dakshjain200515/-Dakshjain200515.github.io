@@ -9,11 +9,6 @@
 <body>
 
     <style>
-        .left {
-            border: 1px solid #ffffea;
-            border-radius: 60px;
-            margin-left: 10px;
-        }
 
         input {
             margin-bottom: 2rem;
@@ -28,7 +23,7 @@
   
   .right-align {
     position: absolute;
-    top: 0;
+    top: 1;
     right: 0;
     margin: 15px; /* Adjust as needed */
 }
@@ -49,12 +44,11 @@
 
 #split1 {
       height: 85%;
-      width: 30%;
+      width: 100%;
       position: fixed;
       z-index: 1;
       bottom: 0;
       overflow-x: hidden;
-      overflow-y: hidden;
       padding-top: 20px;
     }
   
@@ -92,7 +86,6 @@
       border: none;
       margin: 20px;
       margin-top: 5px;
-      margin-left: 30px;
       border: 3px solid black;
       border-radius: 4px;
       width: 85%;
@@ -106,9 +99,8 @@
   }
     
   h1 {
-      font-size: 5rem;
+      font-size: 3rem;
       margin-top: -60px;
-      text-align: center;
       color: #1abc9c;
       font-weight: bolder;
       text-shadow: 1px 1px 2px black, 0 0 25px whitesmoke, 0 0 5px #008080;
@@ -122,7 +114,6 @@
   .label {
       font-size: 20px;
       font-weight: bold;
-      margin-left: 2rem;
       width: 200px;
       color: #1abc9c;
   }
@@ -133,7 +124,6 @@
       border: 3px solid #333333;
       border-radius: 10px;
       padding: 8px;
-      margin-left: 2rem;
       margin-top: 0px;
       color:#333333;
       width: 80%;
@@ -235,32 +225,33 @@ table {
 }
 
 
+
     </style>
 
 
 <div id="main">
 
-    <div class="right-align">
+    <div class="right-align" style="margin-top: 1rem;">
         <h1 id="created_by">
-            <span class="created-by">Developed by</span>
+            <span class="created-by" style="margin-right: 1rem;">Developed by</span>
             <span class="name">DAKSH</span>
         </h1>
     </div>
 
     <h1 id="h1" style="margin-top: -1rem;">GST Calculator</h1>
 
-    <div id="split1" class="client_details left">
         <form id="invoiceForm">
 
-            <div style="margin-top: 2rem;">
-                <label for="partyName" class="label">Party Name:</label>
-                <input type="text" id="partyName" pattern="[A-Za-z]+" placeholder="Enter Name" required>
+          <div style="display: flex;">
+
+            <div>
+                <label for="partyName" class="label">Party Name:</label><br>
+                <input type="text" id="partyName" pattern="[A-Za-z]+" required>
             </div>
 
             <div>
                 <label for="bill_purity" class="label">Purity</label><br>
-                <input id="bill_purity" name="bill_purity" list="purity" type="number" class="number"
-                       placeholder="Enter Purity">
+                <input id="bill_purity" name="bill_purity" list="purity" type="number" class="number">
                 <datalist id="purity">
                     <option value="995"></option>
                     <option value="999"></option>
@@ -268,23 +259,21 @@ table {
             </div>
 
             <div>
-                <label for="weight" class="label">Weight:</label>
-                <input type="number" id="weight" min="0" class="number" placeholder="Enter Weight" required>
+                <label for="weight" class="label">Weight:</label><br>
+                <input type="number" id="weight" min="0" class="number" required>
             </div>
 
             <div>
-                <label for="rate" class="label">Rate:</label>
-                <input type="number" id="rate" min="0" class="number" placeholder="Enter Rate" required>
+                <label for="rate" class="label">Rate:</label><br>
+                <input type="number" id="rate" min="0" class="number" required>
             </div>
+          </div>
 
-            <div style="margin-top: 2rem;">
+            <div>
                 <button type="button" class="button" onclick="addEntry()">Add Entry</button>
             </div>
 
         </form>
-    </div>
-
-    <div id="split2" class="right">
 
         <h2>Entries</h2>
         <table id="entryTable" border="1" style="margin-top: -4rem;">
