@@ -142,7 +142,6 @@ table {
       border-collapse: collapse;
       width: 98%;
       font-size: 18px;
-      margin: 1rem;
       margin-top: 0px;
     }
       
@@ -242,11 +241,6 @@ table {
 
         <form id="invoiceForm">
 
-            <div>
-                <label for="partyName" class="label">Party Name:</label><br>
-                <input type="text" id="partyName" pattern="[A-Za-z]+" required>
-            </div>
-
           <div style="display: flex;">
 
 
@@ -280,7 +274,6 @@ table {
         <table id="entryTable" border="1" style="margin-top: -4rem;">
             <thead>
             <tr>
-                <th>Party Name</th>
                 <th>Purity</th>
                 <th>Weight</th>
                 <th>Rate</th>
@@ -318,7 +311,6 @@ function calculate(weight, rate) {
 
         // Function to add entry to the table
 function addEntry() {
-    var partyName = document.getElementById('partyName').value;
     var weight = parseInt(document.getElementById('weight').value);
     var rate = parseInt(document.getElementById('rate').value);
     var purity = parseInt(document.getElementById('bill_purity').value); // Add this line to get the purity value
@@ -326,8 +318,7 @@ function addEntry() {
 
             var tableBody = document.getElementById('entryBody');
             var newRow = tableBody.insertRow();
-            newRow.innerHTML = `<td>${partyName}</td>
-                                <td class="number">${purity}</td> <!-- Display the purity in the table -->
+            newRow.innerHTML = `<td class="number">${purity}</td> <!-- Display the purity in the table -->
                                 <td class="number">${weight}</td>
                                 <td class="number">${rate}</td>
                                 <td class="number">${amount}</td>
@@ -336,7 +327,6 @@ function addEntry() {
                                 <td class="number">${finalAmount}</td>`;
 
             // Reset input fields
-            document.getElementById('partyName').value = '';
             document.getElementById('weight').value = '';
             document.getElementById('rate').value = '';
             document.getElementById('bill_purity').value = '';
