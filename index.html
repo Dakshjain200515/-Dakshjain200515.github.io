@@ -75,6 +75,31 @@
       background-color:#000000;
     }
 
+
+    .abutton {
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #1abc9c;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-bottom: 1px;
+    width: 5rem;
+  }
+
+  .abutton:hover {
+    background-color: #0a8069;
+    color: aliceblue;
+  }
+
+    .del {
+    background-color: #DC6A77;
+  }
+
+  .del:hover {
+    background-color: #ff132e;
+  }  
       
   .button {
       font-size: 20px;
@@ -128,6 +153,20 @@
       color:#333333;
       width: 80%;
       background-color: whitesmoke;
+      
+  }
+
+  select {
+      font-size: 20px;
+      font-weight: bold;
+      border: 3px solid #333333;
+      border-radius: 10px;
+      padding: 8px;
+      margin-top: 0px;
+      color:#333333;
+      width: 8rem;
+      background-color: whitesmoke;
+      margin-right: 2rem;
   }
 
   .number {
@@ -223,8 +262,6 @@ table {
   animation: blink 1s infinite;
 }
 
-
-
     </style>
 
 
@@ -246,12 +283,11 @@ table {
 
             <div>
                 <label for="bill_purity" class="label">Purity</label><br>
-                <input id="bill_purity" name="bill_purity" list="purity" type="number" class="number">
-                <datalist id="purity">
-                    <option value="995"></option>
-                    <option value="999"></option>
-                </datalist>
-            </div>
+                <select id="bill_purity" name="bill_purity" class="number">
+                    <option value="995" selected>995</option>
+                    <option value="999">999</option>
+                </select>
+            </div>            
 
             <div>
                 <label for="weight" class="label">Weight:</label><br>
@@ -262,7 +298,18 @@ table {
                 <label for="rate" class="label">Rate:</label><br>
                 <input type="number" id="rate" min="0" class="number" required>
             </div>
-          </div>
+
+
+          <div>
+            <label for="tax_type" class="label">Tax Type:</label><br>
+            <select id="tax_type" name="tax_type" class="number" required>
+                <option value="TDS">TDS</option>
+                <option value="TCS">TCS</option>
+            </select>
+            </div>
+
+        </div>
+
 
             <div>
                 <button type="button" class="button" onclick="addEntry()">Add Entry</button>
@@ -273,83 +320,107 @@ table {
         <h2>Entries</h2>
         <table id="entryTable" border="1" style="margin-top: -4rem;">
             <thead>
-            <tr>
-                <th>Purity</th>
-                <th>Weight</th>
-                <th>Rate</th>
-                <th>Amount</th>
-                <th>GST</th>
-                <th>TDS</th>
-                <th>Final Amount</th>
-            </tr>
+                <tr>
+                    <th>Purity</th>
+                    <th>Weight</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>GST</th>
+                    <th>TDS</th>
+                    <th>TCS</th>
+                    <th>Final Amount</th>
+                    <th >Delete</th>
+                </tr>
             </thead>
             <tbody id="entryBody">
             <!-- Entries will be dynamically added here -->
             </tbody>
+            
+            
             <tfoot id="totalRow">
-            <tr style="background-color: yellow; font-size: 1rem;">
-                <td>Total:</td>
-                <td id="totalWeight" class="number">0</td>
+                <tr style="background-color: yellow; font-size: 1.5rem;">
+                    <td colspan="2">Total Weight:</td>
+                    <td id="totalWeight" class="number">0</td>
+    
+                    <td colspan="2" style="background-color: white;"></td>
+                    <td colspan="2">Total Final Amount:</td>
+                    <td id="totalFinalAmount" class="number">0.00</td>
+                    <td style="background-color: white;"></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
 
-                <td colspan="2" style="background-color: white;"></td>
-                <td colspan="2">Total:</td>
-                <td id="totalFinalAmount" class="number">0.00</td>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <script>
-function calculate(weight, rate) {
-    var amount = Math.round(weight * rate / 10);
-    var gst = Math.round(amount * 0.03);
-    var tds = Math.round(amount * 0.001);
-    var finalAmount = amount + gst - tds;
-    return [amount, gst, tds, finalAmount];
-}
-
-
-        // Function to add entry to the table
-function addEntry() {
-    var weight = parseInt(document.getElementById('weight').value);
-    var rate = parseInt(document.getElementById('rate').value);
-    var purity = parseInt(document.getElementById('bill_purity').value); // Add this line to get the purity value
-    var [amount, gst, tds, finalAmount] = calculate(weight, rate);
-
-            var tableBody = document.getElementById('entryBody');
-            var newRow = tableBody.insertRow();
-            newRow.innerHTML = `<td class="number">${purity}</td> <!-- Display the purity in the table -->
-                                <td class="number">${weight}</td>
-                                <td class="number">${rate}</td>
-                                <td class="number">${amount}</td>
-                                <td class="number">${gst}</td>
-                                <td class="number">${tds}</td>
-                                <td class="number">${finalAmount}</td>`;
-
-            // Reset input fields
-            document.getElementById('weight').value = '';
-            document.getElementById('rate').value = '';
-            document.getElementById('bill_purity').value = '';
-
-            updateTotal();
-        }
-
-        // Function to update total weight and final amount
-        function updateTotal() {
-            var totalWeight = 0;
-            var totalFinalAmount = 0;
-
-            var rows = document.querySelectorAll('#entryBody tr');
-            rows.forEach(function (row) {
-                totalWeight += parseFloat(row.cells[1].textContent);
-                totalFinalAmount += parseFloat(row.cells[6].textContent);
-            });
-
-            // Update total weight and final amount in the footer
-            document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
-            document.getElementById('totalFinalAmount').textContent = totalFinalAmount.toFixed(2);
-        }
-    </script>
-
+        <script>
+            function calculate(weight, rate, taxType) {
+                var amount = weight * rate / 10;
+                var gst = amount * 0.03;
+                if (taxType === 'TDS') {
+                    var tds = amount * 0.001;
+                    var finalAmount = amount + gst - tds;
+                    return [amount, gst, tds, 0, finalAmount];
+                } else if (taxType === 'TCS') {
+                    var tcs = (amount + gst) * 0.001;
+                    var finalAmount = amount + gst + tcs;
+                    return [amount, gst, 0, tcs, finalAmount];
+                } else {
+                    // Default case for no tax or unknown tax type
+                    var finalAmount = amount + gst;
+                    return [amount, gst, 0, 0, finalAmount];
+                }
+            }
+        
+            // Function to add entry to the table
+            function addEntry() {
+                var weight = parseInt(document.getElementById('weight').value);
+                var rate = parseInt(document.getElementById('rate').value);
+                var purity = parseInt(document.getElementById('bill_purity').value);
+                var taxType = document.getElementById('tax_type').value;
+                var [amount, gst, tds, tcs, finalAmount] = calculate(weight, rate, taxType);
+        
+                var tableBody = document.getElementById('entryBody');
+                var newRow = tableBody.insertRow();
+                newRow.innerHTML = `<td class="number">${purity}</td>
+                                    <td class="number">${weight}</td>
+                                    <td class="number">${rate}</td>
+                                    <td class="number">${amount}</td>
+                                    <td class="number">${gst}</td>
+                                    <td class="number">${tds}</td>
+                                    <td class="number">${tcs}</td>
+                                    <td class="number">${finalAmount}</td>
+                                    <td><button class="abutton del" onclick="deleteRow(this.parentNode.parentNode)">Delete</button></td>`;
+        
+                // Reset input fields
+                document.getElementById('weight').value = '';
+                document.getElementById('rate').value = '';
+                document.getElementById('bill_purity').value = '';
+        
+                updateTotal();
+            }
+        
+            // Function to delete row
+            function deleteRow(row) {
+                row.parentNode.removeChild(row);
+                updateTotal();
+            }
+        
+            // Function to update total weight and final amount
+            function updateTotal() {
+                var totalWeight = 0;
+                var totalFinalAmount = 0;
+        
+                var rows = document.querySelectorAll('#entryBody tr');
+                rows.forEach(function (row) {
+                    totalWeight += parseFloat(row.cells[1].textContent);
+                    totalFinalAmount += parseFloat(row.cells[7].textContent);
+                });
+        
+                // Update total weight and final amount in the footer
+                document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
+                document.getElementById('totalFinalAmount').textContent = totalFinalAmount.toFixed(2);
+            }
+        </script>
+        
+    
 </body>
 </html>
