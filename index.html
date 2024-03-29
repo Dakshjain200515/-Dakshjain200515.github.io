@@ -10,6 +10,16 @@
 
     <style>
 
+.company-logo {
+    text-align: center; /* Center align the logo */
+    margin-top: 50px; /* Adjust the margin as needed */
+}
+
+.company-logo img {
+    max-width: 100%; /* Make the logo responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
         input {
             margin-bottom: 2rem;
         }
@@ -268,13 +278,6 @@ table {
 
 <div id="main">
 
-    <div class="right-align" style="margin-top: 1rem;">
-        <h1 id="created_by">
-            <span class="created-by" style="margin-right: 1rem;">Developed by</span>
-            <span class="name">DAKSH</span>
-        </h1>
-    </div>
-
     <h1 id="h1" style="margin-top: -1rem;">GST Calculator</h1>
 
         <form id="invoiceForm">
@@ -351,6 +354,10 @@ table {
                 </tfoot>
             </table>
         </div>
+
+        <div class="company-logo">
+          <img style="margin-top: -5rem;" src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Company Logo">
+      </div>
 
         <script>
             function calculate(weight, rate, taxType) {
