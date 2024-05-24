@@ -11,6 +11,23 @@
 
     <style>
 
+header {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+        }
+
 /* Footer styles */
 footer {
   width: 100%;
@@ -294,6 +311,10 @@ table {
 
 <div id="main">
 
+<header>
+    <img src="/Users/alpeshjain/Desktop/BullionEdge Solutions/Brand img/BullionEdge Solutions Logo_TRANSPARENT.png" alt="Company Logo" class="logo">
+</header>
+
     <h1 id="h1" style="margin-top: -1rem;">GST Calculator</h1>
 
         <form id="invoiceForm">
@@ -374,11 +395,12 @@ table {
         <div class="company-logo">
           <img style="margin-top: -5rem;" src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Company Logo">
       </div>
--->
+
     <footer>
       <img src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Company Logo" class="logo">
     </footer>
-
+-->
+    
         <script>
             function calculate(weight, rate, taxType) {
                 var amount = weight * rate / 10;
