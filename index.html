@@ -417,23 +417,37 @@ table {
 </footer>
     
         <script>
-            function calculate(weight, rate, taxType) {
-                var amount = weight * rate / 10;
-                var gst = amount * 0.03;
-                if (taxType === 'TDS') {
-                    var tds = amount * 0.001;
-                    var finalAmount = amount + gst - tds;
-                    return [amount, gst, tds, 0, finalAmount];
-                } else if (taxType === 'TCS') {
-                    var tcs = (amount + gst) * 0.001;
-                    var finalAmount = amount + gst + tcs;
-                    return [amount, gst, 0, tcs, finalAmount];
-                } else {
-                    // Default case for no tax or unknown tax type
-                    var finalAmount = amount + gst;
-                    return [amount, gst, 0, 0, finalAmount];
-                }
-            }
+function calculate(weight, rate, taxType) {
+    var amount = weight * rate / 10;
+    var gst = amount * 0.03;
+    if (taxType === 'TDS') {
+        var tds = amount * 0.001;
+        var finalAmount = amount + gst - tds;
+        // Round off the values
+        amount = amount.toFixed(2);
+        gst = gst.toFixed(2);
+        tds = tds.toFixed(2);
+        finalAmount = finalAmount.toFixed(2);
+        return [amount, gst, tds, 0, finalAmount];
+    } else if (taxType === 'TCS') {
+        var tcs = (amount + gst) * 0.001;
+        var finalAmount = amount + gst + tcs;
+        // Round off the values
+        amount = amount.toFixed(2);
+        gst = gst.toFixed(2);
+        tcs = tcs.toFixed(2);
+        finalAmount = finalAmount.toFixed(2);
+        return [amount, gst, 0, tcs, finalAmount];
+    } else {
+        // Default case for no tax or unknown tax type
+        var finalAmount = amount + gst;
+        // Round off the values
+        amount = amount.toFixed(2);
+        gst = gst.toFixed(2);
+        finalAmount = finalAmount.toFixed(2);
+        return [amount, gst, 0, 0, finalAmount];
+    }
+}
         
             // Function to add entry to the table
             function addEntry() {
