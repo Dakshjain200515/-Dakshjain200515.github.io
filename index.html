@@ -10,6 +10,51 @@
 <body>
 
     <style>
+       footer {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        .powered-by {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo {
+            max-width: 100px;
+            height: auto;
+            margin-top: 10px;
+            animation: pulsate 1.5s infinite;
+            cursor: pointer;
+        }
+
+        /* Pulsate animation */
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Media query for smaller screens */
+        @media screen and (max-width: 768px) {
+            .powered-by {
+                font-size: 1rem; /* Adjust font size for smaller screens */
+            }
+        }
 
 header {
             width: 100%;
