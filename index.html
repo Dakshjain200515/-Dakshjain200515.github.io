@@ -9,7 +9,60 @@
 </head>
 <body>
 
-    <style>
+<style>
+
+/* Menu bar styles */
+.menu-bar {
+    background-color: #333;
+    overflow: hidden;
+    position: relative;
+}
+.menu-bar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.menu-bar a:hover, .menu-bar a.active {
+    background-color: #1abc9c;
+    color: white;
+}
+.menu-bar .icon {
+    display: none;
+    float: right;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+.section {
+    display: none;
+    padding: 20px;
+}
+.section.active {
+    display: block;
+}
+
+p {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .menu-bar a { display: none; }
+    .menu-bar a.icon { float: right; display: block; }
+}
+@media screen and (max-width: 600px) {
+    .menu-bar.responsive { position: relative; }
+    .menu-bar.responsive .icon { position: absolute; right: 0; top: 0; }
+    .menu-bar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+
+
+
        footer {
             width: 100%;
             background-color: black;
@@ -188,7 +241,7 @@ footer {
     color: #000000;
     border: 1px solid black;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 12px;
     margin-bottom: 1px;
     width: 5rem;
   }
@@ -207,7 +260,7 @@ footer {
   }  
       
   .button {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
       background-color: #1abc9c;
@@ -229,7 +282,7 @@ footer {
   }
     
   h1 {
-      font-size: 3rem;
+      font-size: 2rem;
       margin-top: -60px;
       color: #1abc9c;
       font-weight: bolder;
@@ -242,27 +295,29 @@ footer {
   }
     
   .label {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: bold;
       width: 200px;
       color: #1abc9c;
   }
   
   input {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: bold;
       border: 3px solid #333333;
       border-radius: 10px;
       padding: 8px;
       margin-top: 0px;
+      margin-bottom: 5px;
       color:#333333;
       width: 10rem;
       background-color: whitesmoke;
-      
+      height: 16px; /* Adjust the height as needed */
+
   }
 
   select {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: bold;
       border: 3px solid #333333;
       border-radius: 10px;
@@ -273,6 +328,9 @@ footer {
       background-color: whitesmoke;
       margin-right: 2rem;
       margin-bottom: 2rem;
+      height: 40px; /* Adjust the height as needed */
+      margin-bottom: 5px;
+
   }
 
   .number {
@@ -285,8 +343,8 @@ footer {
   
 table {
       border-collapse: collapse;
-      width: 98%;
-      font-size: 18px;
+      width: 40%;
+      font-size: 15px;
       margin-top: 0px;
     }
       
@@ -400,12 +458,14 @@ table {
     transform: translateY(-5px);
   }
 }
-    </style>
+
+
+</style>
 
 
 <div id="main">
 
-  <header>
+<header>
     <div>
       <span style=" font-size: 1.5rem;">Powered by</span>
     </div>
@@ -418,86 +478,165 @@ table {
     </a>
 </header>
 
-    <h1 id="h1" style="margin-top: -1rem;">GST Calculator</h1>
+<div class="menu-bar" id="menuBar">
+  <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">Options &#9776;</a>
+  <a href="#" id="link-gstCalculator" onclick="showSection('gstCalculator')">GST Calculator</a>
+  <a href="#" id="link-ornamentBill" onclick="showSection('ornamentBill')">Ornament Bill</a>
+</div>
 
-        <form id="invoiceForm">
+<section id="gstCalculator" class="section active">
+  <h1 id="h1" style="margin-top: 0rem;">GST Calculator</h1>
 
-          <div style="display: flexbox;">
+  <form id="invoiceForm">
 
-
-            <div>
-                <label for="bill_purity" class="label">Purity</label><br>
-                <select id="bill_purity" name="bill_purity" class="number">
-                    <option value="995" selected>995</option>
-                    <option value="999">999</option>
-                </select>
-            </div>            
-
-            <div>
-                <label for="weight" class="label">Weight:</label><br>
-                <input type="number" id="weight" min="0" class="number" required>
-            </div>
-
-            <div>
-                <label for="rate" class="label">Rate:</label><br>
-                <input type="number" id="rate" min="0" class="number" required>
-            </div>
+    <div style="display: flexbox;">
 
 
-          <div>
-            <label for="tax_type" class="label">Tax Type:</label><br>
-            <select id="tax_type" name="tax_type" class="number" required>
-                <option value="TDS">TDS</option>
-                <option value="TCS">TCS</option>
-            </select>
-            </div>
+      <div>
+          <label for="bill_purity" class="label">Purity</label><br>
+          <select id="bill_purity" name="bill_purity" class="number">
+              <option value="995" selected>995</option>
+              <option value="999">999</option>
+          </select>
+      </div>            
 
-        </div>
+      <div>
+          <label for="weight" class="label">Weight:</label><br>
+          <input type="number" id="weight" min="0" class="number" required>
+      </div>
+
+      <div>
+          <label for="rate" class="label">Rate:</label><br>
+          <input type="number" id="rate" min="0" class="number" required>
+      </div>
 
 
-            <div style="margin-left: -1rem; width: 20rem;">
-                <button type="button" class="button" onclick="addEntry()">Add Entry</button>
-            </div>
+    <div>
+      <label for="tax_type" class="label">Tax Type:</label><br>
+      <select id="tax_type" name="tax_type" class="number" required>
+          <option value="TDS">TDS</option>
+          <option value="TCS">TCS</option>
+      </select>
+      </div>
 
-        </form>
+  </div>
 
-        <h2>Entries</h2>
-        <table id="entryTable" border="1" style="margin-top: -4rem;">
-            <thead>
-                <tr>
-                    <th>Purity</th>
-                    <th>Weight</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
-                    <th>GST</th>
-                    <th>TDS</th>
-                    <th>TCS</th>
-                    <th>Final Amount</th>
-                    <th >Delete</th>
-                </tr>
-            </thead>
-            <tbody id="entryBody">
-            <!-- Entries will be dynamically added here -->
-            </tbody>
-            
-            
-            <tfoot id="totalRow">
-                <tr style="background-color: yellow; font-size: 1.5rem;">
-                    <td colspan="2">Total Weight:</td>
-                    <td id="totalWeight" class="number">0</td>
-    
-                    <td colspan="2" style="background-color: white;"></td>
-                    <td colspan="2">Total Final Amount:</td>
-                    <td id="totalFinalAmount" class="number">0.00</td>
-                    <td style="background-color: white;"></td>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
 
-        <div style="height: 10rem;">
-            <p style="10rem"></p>
-        </div>
+      <div style="margin-left: -1rem; width: 20rem;">
+          <button type="button" class="button" onclick="addEntry()">Add Entry</button>
+      </div>
+
+  </form>
+
+  <h2>Entries</h2>
+  <table id="entryTable" border="1" style="margin-top: -4rem;">
+      <thead>
+          <tr>
+              <th>Purity</th>
+              <th>Weight</th>
+              <th>Rate</th>
+              <th>Amount</th>
+              <th>GST</th>
+              <th>TDS</th>
+              <th>TCS</th>
+              <th>Final Amount</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody id="entryBody">
+      <!-- Entries will be dynamically added here -->
+      </tbody>
+      
+      
+      <tfoot id="totalRow">
+          <tr style="background-color: yellow; font-size: 1.2rem;">
+              <td colspan="2">Total Weight:</td>
+              <td id="totalWeight" class="number">0</td>
+
+              <td colspan="2" style="background-color: white;"></td>
+              <td colspan="2">Total Final Amount:</td>
+              <td id="totalFinalAmount" class="number">0.00</td>
+              <td style="background-color: white;"></td>
+          </tr>
+          </tfoot>
+      </table>
+  </div>
+
+  <div style="height: 10rem;">
+      <p style="10rem"></p>
+  </div>
+
+</section>
+
+<section id="ornamentBill" class="section">
+  <h1 id="h1" style="margin-top: -12rem;">Ornament Bill</h1>
+  <form id="ornamentForm">
+      <div>
+          <label for="ornament_weight" class="label">Bullion Weight</label><br>
+          <input type="number" id="ornament_weight" min="0" class="number" required>
+      </div>
+      <div>
+          <label for="ornament_rate" class="label">Bullion Rate</label><br>
+          <input type="number" id="ornament_rate" min="0" class="number" required>
+      </div>
+      <div>
+          <label for="ornament_purity" class="label">Bullion Purity</label><br>
+          <select id="ornament_purity" name="ornament_purity" class="number" required>
+              <option value="995">995</option>
+              <option value="999">999</option>
+          </select>
+      </div>
+      <div>
+        <label for="ornament_melting" class="label">Ornament Melting</label><br>
+        <input type="number" id="ornament_melting" min="0" class="number" required>
+      </div>
+
+      <div style="margin-left: -1rem; width: 20rem;">
+        <button type="button" class="button" onclick="addOrnamentEntry()">Add Entry</button>
+      </div>
+
+  </form>
+
+  <!-- Table for Ornament Entries -->
+  <h2>Ornament Entries</h2>
+  <table id="ornamentEntryTable" border="1" style="margin-top: -4rem;">
+
+    <thead>
+      <tr>
+          <th colspan="3">Bullion</th>
+          <th colspan="4">Ornament</th>
+          <th></th>
+      </tr>
+      <tr>
+          <th>Weight</th>
+          <th>Rate</th>
+          <th>Purity</th>
+          <th>Melting</th>
+          <th>Rate</th>
+          <th>Weight</th>
+          <th>Amount with GST</th>
+          <th>Delete</th>
+      </tr>
+  </thead>
+  
+      <tbody id="ornamentEntryBody">
+          <!-- Entries will be dynamically added here -->
+      </tbody>
+      <!-- Add a footer row for totals if needed -->
+  </table>
+</div>
+
+<div style="height: 10rem;">
+  <p style="10rem"></p>
+</div>
+</section>
+
+<section id="welcome2" class="section">
+  <h1 id="h1" style="margin-top: -12rem;">Welcome to Section 3</h1>
+  <p>This is the welcome screen for section 3.</p>
+</section>
+
+
 
 
 <footer style="margin-bottom: -2rem;">
@@ -505,7 +644,38 @@ table {
         <img src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Footer Logo" class="logo">
 </footer>
     
-        <script>
+<script>
+
+function toggleMenu() {
+    var x = document.getElementById("menuBar");
+    if (x.className === "menu-bar") {
+        x.className += " responsive";
+    } else {
+        x.className = "menu-bar";
+    }
+}
+
+function showSection(sectionId) {
+    // Hide all sections
+    var sections = document.querySelectorAll('.section');
+    sections.forEach(function(section) {
+        section.classList.remove('active');
+    });
+
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active');
+
+    // Remove 'active' class from all links
+    var links = document.querySelectorAll('.menu-bar a');
+    links.forEach(function(link) {
+        link.classList.remove('active');
+    });
+
+    // Add 'active' class to the selected link
+    document.getElementById('link-' + sectionId).classList.add('active');
+}
+
+
 function calculate(weight, rate, taxType) {
     var amount = weight * rate / 10;
     var gst = amount * 0.03;
@@ -584,10 +754,76 @@ function calculate(weight, rate, taxType) {
                 });
         
                 // Update total weight and final amount in the footer
-                document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);
-                document.getElementById('totalFinalAmount').textContent = totalFinalAmount.toFixed(2);
+                document.getElementById('totalWeight').textContent = totalWeight.toFixed(0);
+                document.getElementById('totalFinalAmount').textContent = totalFinalAmount.toFixed(0);
             }
-        </script>
+
+// Function to add entry to the Ornament table
+function addOrnamentEntry() {
+    var weight = parseFloat(document.getElementById('ornament_weight').value);
+    var rate = parseFloat(document.getElementById('ornament_rate').value);
+    var purity = parseFloat(document.getElementById('ornament_purity').value);
+    var ornamentMelting = parseFloat(document.getElementById('ornament_melting').value);
+
+    purity = purity/10;
+
+    // Calculate fine weight
+    var fineWeight = (weight * purity) / 100;
+
+    // Calculate amount
+    var amount;
+    if (purity === 99.5) {
+        amount = fineWeight * rate / 9.95;
+    } else if (purity === 99.9) {
+        amount = fineWeight * rate / 10;
+    } else {
+        // Handle other purity values
+        console.error("Unsupported purity value");
+        return; // Exit the function
+    }
+    amount = amount.toFixed(2);
+
+    // Calculate GST
+    var gst = amount * 0.03;
+    gst = gst.toFixed(2);
+
+    // Calculate Ornament Weight and Ornament Rate
+    var ornamentWeight = (fineWeight / ornamentMelting) * 100;
+    ornamentWeight = ornamentWeight.toFixed(3);
+    var ornamentRate = amount / ornamentWeight;
+
+    // Calculate Ornament Bill Amount and Ornament Bill GST
+    var ornamentBillAmount = ornamentWeight * ornamentRate;
+    ornamentBillAmount = ornamentBillAmount.toFixed(2);
+    var ornamentBillGST = ornamentBillAmount * 0.03;
+    ornamentBillGST = ornamentBillGST.toFixed(2);
+
+    // Calculate amount with GST
+    var amountWithGST = parseFloat(ornamentBillAmount) + parseFloat(ornamentBillGST);
+    amountWithGST = amountWithGST.toFixed(2);
+
+    // Get the table body
+    var tableBody = document.getElementById('ornamentEntryBody');
+
+    // Create a new row and populate it with calculated values
+    var newRow = tableBody.insertRow();
+    newRow.innerHTML = `<td>${weight}</td>
+                        <td>${rate}</td>
+                        <td>${purity}</td>
+                        <td>${ornamentMelting.toFixed(2)}</td>
+                        <td>${ornamentRate.toFixed(2)}</td>
+                        <td>${ornamentWeight}</td>
+                        <td>${amountWithGST}</td>
+                        <td><button class="abutton del" onclick="deleteRow(this.parentNode.parentNode)">Delete</button></td>`;
+
+    // Reset input fields
+    document.getElementById('ornament_weight').value = '';
+    document.getElementById('ornament_rate').value = '';
+}
+
+
+    
+</script>
         
     
 </body>
