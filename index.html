@@ -469,8 +469,8 @@ table {
     <div>
       <span style=" font-size: 1.5rem;">Powered by</span>
     </div>
-    <a href="http://viombullion.com" target="_blank">
-        <img src="VIOM LOGO.png" class="footer-logo">
+    <img src="VIOM LOGO.png" class="footer-logo">
+    <img src="/Users/alpeshjain/Desktop/BullionEdge Solutions/Brand img/VIOM LOGO.png" class="footer-logo">
         <div class="click-prompt">
             <span class="click-text">Click it </span>
             <span class="arrow"> ↑</span>
@@ -481,7 +481,8 @@ table {
 <div class="menu-bar" id="menuBar">
   <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">Options &#9776;</a>
   <a href="#" id="link-gstCalculator" onclick="showSection('gstCalculator')">GST Calculator</a>
-  <a href="#" id="link-ornamentBill" onclick="showSection('ornamentBill')">Ornament Bill</a>
+  <a href="#" id="link-ornamentBill" onclick="showSection('ornamentBill')">Ornament Bill by Weight</a>
+  <a href="#" id="link-ornamentBillByPayment" onclick="showSection('ornamentBillByPayment')">Ornament Bill by Payment</a> <!-- New section link -->
 </div>
 
 <section id="gstCalculator" class="section active">
@@ -569,7 +570,8 @@ table {
 </section>
 
 <section id="ornamentBill" class="section">
-  <h1 id="h1" style="margin-top: -12rem;">Ornament Bill</h1>
+  <h1 id="h1" style="margin-top: -12rem;">Ornament Bill by Weight</h1>
+
   <form id="ornamentForm">
       <div>
           <label for="ornament_weight" class="label">Bullion Weight</label><br>
@@ -608,14 +610,14 @@ table {
           <th></th>
       </tr>
       <tr>
-          <th>Weight</th>
-          <th>Rate</th>
-          <th>Purity</th>
-          <th>Melting</th>
-          <th>Rate</th>
-          <th>Weight</th>
-          <th>Amount with GST</th>
-          <th>Delete</th>
+          <th style="background-color:pink; color: black;">Weight</th>
+          <th style="background-color:pink; color: black;">Rate</th>
+          <th style="background-color:pink; color: black;">Purity</th>
+          <th style="background-color:blue; color: white;">Melting</th>
+          <th style="background-color:blue; color: white;">Rate</th>
+          <th style="background-color:blue; color: white;">Weight</th>
+          <th style="background-color:blue; color: white;">Amount with GST</th>
+          <th style="background-color:red; color: white;">Delete</th>
       </tr>
   </thead>
   
@@ -631,18 +633,54 @@ table {
 </div>
 </section>
 
-<section id="welcome2" class="section">
-  <h1 id="h1" style="margin-top: -12rem;">Welcome to Section 3</h1>
-  <p>This is the welcome screen for section 3.</p>
+
+<section id="ornamentBillByPayment" class="section active">
+  <h1 id="h1" style="margin-top: -12rem;">Ornament Bill by Payment</h1>
+
+  <form id="ornamentBill">
+    <div>
+      <label for="rate_without_gst" class="label">Rate w/o GST</label><br>
+      <input type="number" id="rate_without_gst" min="0" class="number" required>
+    </div>
+
+    <div>
+      <label for="payment" class="label">Payment with GST</label><br>
+      <input type="number" id="payment" min="0" class="number" required>
+    </div>
+
+    <div>
+      <label for="wastage" class="label">Ornament Melting</label><br>
+      <input type="number" id="wastage" min="0" class="number" required>
+    </div>
+
+    <div style="margin-left: -1rem; width: 20rem;">
+      <button type="button" class="button" onclick="addOrnamentBill()">Add Entry</button>
+    </div>
+
+    <table id="ornamentBillTable" border="1">
+      <thead>
+        <tr>
+          <th>Rate w/o GST</th>
+          <th>Payment amount</th>
+          <th>Ornament Melting</th>
+          <th>Payment w/o GST</th>
+          <th>Rate</th>
+          <th>Bill Weight</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="ornamentBillBody">
+        <!-- Entries will be dynamically added here -->
+      </tbody>
+    </table>
+  </form>
 </section>
-
-
 
 
 <footer style="margin-bottom: -2rem;">
     <div class="powered-by">Developed By</div>
-        <img src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Footer Logo" class="logo">
-</footer>
+    <img src="BullionEdge Solutions Logo_TRANSPARENT.png" alt="Footer Logo" class="logo">
+  </footer>
     
 <script>
 
@@ -730,9 +768,7 @@ function calculate(weight, rate, taxType) {
         
                 // Reset input fields
                 document.getElementById('weight').value = '';
-                document.getElementById('rate').value = '';
-                document.getElementById('bill_purity').value = '';
-        
+                document.getElementById('rate').value = '';        
                 updateTotal();
             }
         
@@ -807,13 +843,13 @@ function addOrnamentEntry() {
 
     // Create a new row and populate it with calculated values
     var newRow = tableBody.insertRow();
-    newRow.innerHTML = `<td>${weight}</td>
-                        <td>${rate}</td>
-                        <td>${purity}</td>
-                        <td>${ornamentMelting.toFixed(2)}</td>
-                        <td>${ornamentRate.toFixed(2)}</td>
-                        <td>${ornamentWeight}</td>
-                        <td>${amountWithGST}</td>
+    newRow.innerHTML = `<td style="background-color:rgb(255, 235, 238)">${weight}</td>
+                        <td style="background-color:rgb(255, 235, 238)">${rate}</td>
+                        <td style="background-color:rgb(255, 235, 238)">${purity}</td>
+                        <td style="background-color:rgb(179, 244, 255);">${ornamentMelting.toFixed(2)}</td>
+                        <td style="background-color:rgb(179, 244, 255);">${ornamentRate.toFixed(2)}</td>
+                        <td style="background-color:rgb(179, 244, 255);">${ornamentWeight}</td>
+                        <td style="background-color:rgb(179, 244, 255);">${amountWithGST}</td>
                         <td><button class="abutton del" onclick="deleteRow(this.parentNode.parentNode)">Delete</button></td>`;
 
     // Reset input fields
@@ -822,6 +858,41 @@ function addOrnamentEntry() {
 }
 
 
+function addOrnamentBill() {
+  var rate = parseFloat(document.getElementById('rate_without_gst').value);
+  var payment = parseFloat(document.getElementById('payment').value);
+  var ornamentMelting = parseFloat(document.getElementById('wastage').value);
+
+  // Calculate additional values
+  var withoutGstPayment = (payment / 103) * 10;
+  var rateForBill = (rate * ornamentMelting) / 99.5;
+  var weightForBill = (withoutGstPayment / rateForBill) * 100;
+
+  var tableBillBody = document.getElementById('ornamentBillBody');
+
+  // Create a new row and populate it with calculated values
+  var newRow = tableBillBody.insertRow();
+  newRow.innerHTML = `<td style="background-color:rgb(255, 235, 238)">${rate}</td>
+                      <td style="background-color:rgb(255, 235, 238)">${payment}</td>
+                      <td style="background-color:rgb(255, 235, 238)">${ornamentMelting}</td>
+                      <td>${withoutGstPayment.toFixed(2)}</td>
+                      <td>${rateForBill.toFixed(2)}</td>
+                      <td>${weightForBill.toFixed(2)}</td>
+                      <td><button class="abutton del" onclick="deleteRow(this.parentNode.parentNode)">Delete</button></td>`;
+
+  // Reset input fields
+  document.getElementById('rate_without_gst').value = '';
+  document.getElementById('payment').value = '';
+  document.getElementById('wastage').value = '';
+}
+
+
+function deleteRow(row) {
+  var table = row.parentNode;
+  table.removeChild(row);
+}
+
+  
     
 </script>
         
